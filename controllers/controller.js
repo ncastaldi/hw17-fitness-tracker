@@ -14,6 +14,10 @@ router.get("/stats", (function (req, res) {
     res.sendFile(path.join(__dirname, "../public/stats.html"));
 }));
 
+router.get("/exercise", (function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/exercise.html"));
+}));
+
 // Define API Routes
 
 // Export routes for server.js to use.
