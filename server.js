@@ -16,6 +16,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitness-tracker
     useCreateIndex: true,
 });
 
+// Log successful or failed database connection
 const connection = mongoose.connection;
 
 connection.on("connected", () => {
@@ -36,7 +37,6 @@ app.use(express.json());
 // Import routes
 const routes = require("./controllers/controller");
 app.use(routes);
-
 
 // Starts Express server listening on predefined port
 app.listen(PORT, () => {
