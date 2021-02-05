@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/ncastaldi/hw17-fitness-tracker/issues"
   },
-  "homepage": "https://github.com/ncastaldi/hw17-fitness-tracker#readme"
+  "homepage": "https://github.com/ncastaldi/hw17-fitness-tracker#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
