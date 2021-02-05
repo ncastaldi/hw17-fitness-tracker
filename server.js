@@ -33,6 +33,11 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Import routes
+const routes = require("./controllers/controller");
+app.use(routes);
+
+
 // Starts Express server listening on predefined port
 app.listen(PORT, () => {
     console.log(`Your server is running on http://localhost:${PORT}`);
