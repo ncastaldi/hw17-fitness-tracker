@@ -26,8 +26,8 @@ router.post("/api/workouts", ({ body }, res) => {
     const workout = new Workout(body);
 
     Workout.create(workout)
-        .then(banana => {
-            res.json(banana);
+        .then(newWorkout => {
+            res.json(newWorkout);
         }).catch(err => {
             res.json(err);
         });
