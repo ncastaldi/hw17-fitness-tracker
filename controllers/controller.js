@@ -23,6 +23,7 @@ router.get("/exercise", (function (req, res) {
 
 // Define API Routes
 router.get("/api/workouts", (req, res) => {
+    // Run find query on database; Return last workout
     Workout.find()
         .sort({ "day": -1 })
         .limit(1)
@@ -35,7 +36,7 @@ router.post("/api/workouts", ({ body }, res) => {
     // Declare and set variable for new workout
     const workout = new Workout(body);
 
-    // Run create query on database
+    // Run create query on database; Add new workout
     Workout.create(workout)
         .then(newWorkout => {
             res.json(newWorkout);
@@ -51,7 +52,7 @@ router.put("/api/workouts/:id", (req, res) => {
     // Declare and set variable for updated workout
     const updatedWorkout = req.body;
 
-    // Run update query on database
+    // Run update query on database; Update current workout
     Workout.findByIdAndUpdate(workoutID, {
         $push: { exercises: updatedWorkout }
     })
@@ -61,6 +62,16 @@ router.put("/api/workouts/:id", (req, res) => {
         .catch((err) => {
             console.log(err);
         });
+});
+
+router.get("/api/workouts/range", (req, res) => {
+    // Run find query on database; Return last 7 workouts
+    Workout.find({})
+        .sort({ "day": -1 })
+        .limit(7)
+        .then((workouts) => {
+            res.json(workouts);
+        })
 });
 
 // Export routes for server.js to use.
