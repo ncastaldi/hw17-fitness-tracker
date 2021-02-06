@@ -22,6 +22,15 @@ router.get("/exercise", (function (req, res) {
 }));
 
 // Define API Routes
+router.get("/api/workouts", (req, res) => {
+    Workout.find()
+        .sort({ "day": -1 })
+        .limit(1)
+        .then((workout) => {
+            res.json(workout);
+        });
+});
+
 router.post("/api/workouts", ({ body }, res) => {
     // Declare and set variable for new workout
     const workout = new Workout(body);
