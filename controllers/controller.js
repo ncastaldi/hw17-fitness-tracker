@@ -2,6 +2,9 @@
 const express = require("express");
 const path = require("path");
 
+// Import models
+const Workout = require("../models/workout");
+
 // Define Express Router
 const router = express.Router();
 
@@ -19,6 +22,16 @@ router.get("/exercise", (function (req, res) {
 }));
 
 // Define API Routes
+router.post("/api/workouts", ({ body }, res) => {
+    const workout = new Workout(body);
+
+    Workout.create(workout)
+        .then(banana => {
+            res.json(banana);
+        }).catch(err => {
+            res.json(err);
+        });
+});
 
 // Export routes for server.js to use.
 module.exports = router;
