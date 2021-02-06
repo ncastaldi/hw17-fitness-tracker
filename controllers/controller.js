@@ -23,8 +23,10 @@ router.get("/exercise", (function (req, res) {
 
 // Define API Routes
 router.post("/api/workouts", ({ body }, res) => {
+    // Declare and set variable for new workout
     const workout = new Workout(body);
 
+    // Run create query on database
     Workout.create(workout)
         .then(newWorkout => {
             res.json(newWorkout);
@@ -34,23 +36,22 @@ router.post("/api/workouts", ({ body }, res) => {
 });
 
 router.put("/api/workouts/:id", (req, res) => {
-
+    // Declare and set variable for workout ID
     const workoutID = req.params.id;
-    const updatedWorkout = req.body;
-    console.log(workoutID);
-    console.log(updatedWorkout);
 
-    Workout.findByIdAndUpdate(
-        { workoutID },
-        { updatedWorkout },
-        function (err, result) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.send(result);
-            }
-        }
-    );
+    // Declare and set variable for updated workout
+    const updatedWorkout = req.body;
+
+    // Run update query on database
+    Workout.findByIdAndUpdate(workoutID, {
+        $push: { exercises: updatedWorkout }
+    })
+        .then((workout) => {
+            res.json(workout);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 // Export routes for server.js to use.
