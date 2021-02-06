@@ -34,12 +34,23 @@ router.post("/api/workouts", ({ body }, res) => {
 });
 
 router.put("/api/workouts/:id", (req, res) => {
-    // Workout.findByIdAndUpdate(
-    //     {body}
-    // )
+
     const workoutID = req.params.id;
+    const updatedWorkout = req.body;
     console.log(workoutID);
-    console.log(req.body);
+    console.log(updatedWorkout);
+
+    Workout.findByIdAndUpdate(
+        { workoutID },
+        { updatedWorkout },
+        function (err, result) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(result);
+            }
+        }
+    );
 });
 
 // Export routes for server.js to use.
