@@ -29,6 +29,9 @@ router.get("/api/workouts", (req, res) => {
         .limit(1)
         .then((workout) => {
             res.json(workout);
+        })
+        .catch((err) => {
+            console.log(err)
         });
 });
 
@@ -40,8 +43,9 @@ router.post("/api/workouts", ({ body }, res) => {
     Workout.create(workout)
         .then(newWorkout => {
             res.json(newWorkout);
-        }).catch(err => {
-            res.json(err);
+        })
+        .catch(err => {
+            console.log(err);
         });
 });
 
@@ -72,6 +76,9 @@ router.get("/api/workouts/range", (req, res) => {
         .then((workouts) => {
             res.json(workouts);
         })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 // Export routes for server.js to use.
